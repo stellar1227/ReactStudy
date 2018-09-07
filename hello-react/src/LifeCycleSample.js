@@ -23,15 +23,17 @@ class LifeCycleSample extends Component {
     }
     
     componentDidMount() {
-        
+        console.log('componentDidMount');
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        
+        console.log('shouldComponentUpdate', nextProps, nextState);
+        // 숫자의 마지막 자리가 4면 리렌더링 하지 않습니다.
+        return nextState.number % 10 !== 4;
     }
 
     componentWillUnmount() {
-        
+        console.log('componentWillUnmount');
     }
 
     handleClick = () => {
@@ -41,20 +43,36 @@ class LifeCycleSample extends Component {
     }
     
     getSnapshotBeforeUpdate(prevProps, prevState) {
-        
+        console.log('getSnapshotBeofreUpdate');
+        if(prevProps.color !== this.props.color){
+            return this.myRef.style.color;
+        }
+        return null;
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('componentDidUpate', prevProps , prevState);
+        if(snapshot){
+            console.log('업데이트 되기 직전 색상 :' , snapshot);
+        }
     } 
     
     
     render() {
-        console.log('render')
-        return (
-            
-            <div>
+        console.log('render');
+        const style = {
+            color : this.props.color
+        }
 
+        return (            
+            <div>
+                <h1 style={style} ref={ref => this.myRef=ref}>
+                    {this.state.number}
+                </h1>
+                <p>color : {this.state.color}</p>
+                <button onClick={this.handleClick}>
+                    더하기
+                </button>
             </div>
         );
     }
