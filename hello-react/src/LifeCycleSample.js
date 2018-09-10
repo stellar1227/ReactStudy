@@ -55,8 +55,7 @@ class LifeCycleSample extends Component {
         if(snapshot){
             console.log('업데이트 되기 직전 색상 :' , snapshot);
         }
-    } 
-    
+    }
     
     render() {
         console.log('render');
