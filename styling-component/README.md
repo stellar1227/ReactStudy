@@ -1,3 +1,4 @@
 # react basic
 
-## 컴포넌트 스타일링 
+## component Styling 
+## webpack eject 설정
